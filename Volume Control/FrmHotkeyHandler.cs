@@ -13,10 +13,9 @@ namespace Volume_Control
 {
     public partial class FrmHotkeyHandler : Form
     {
-        private readonly int WM_HOTKEY = 0x0312;
-
         private readonly int UpHotkeyId = 0x01;
         private readonly int DownHotkeyId = 0x02;
+        private readonly int MuteHotkeyId = 0x03;
 
         private VolumeManager volumeManager;
 
@@ -26,7 +25,10 @@ namespace Volume_Control
         private uint downModifier;
         private uint downChar;
 
-        public FrmHotkeyHandler(VolumeManager volumeManager, uint upModifier, uint upChar, uint downModifier, uint downChar)
+        private uint muteModifier;
+        private uint muteChar;
+
+        public FrmHotkeyHandler(VolumeManager volumeManager, uint upModifier, uint upChar, uint downModifier, uint downChar, uint muteModifier, uint muteChar)
         {
             InitializeComponent();
 
@@ -37,6 +39,9 @@ namespace Volume_Control
 
             this.downModifier = downModifier;
             this.downChar = downChar;
+
+            this.muteModifier = muteModifier;
+            this.muteChar = muteChar;
 
             SetHotkeys();
         }
@@ -54,11 +59,12 @@ namespace Volume_Control
         {
             RegisterHotKey(this.Handle, UpHotkeyId, upModifier, upChar);
             RegisterHotKey(this.Handle, DownHotkeyId, downModifier, downChar);
+            RegisterHotKey(this.Handle, MuteHotkeyId, muteModifier, muteChar);
         }
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_HOTKEY)
+            if (m.Msg == Utils.WM_HOTKEY)
             {
                 int key = ((int)m.LParam >> 16) & 0xFFFF;
                 int modifier = (int)m.LParam & 0xFFFF;
@@ -67,6 +73,8 @@ namespace Volume_Control
                     volumeManager.VolumeUp();
                 else if (key == downChar && modifier == downModifier)
                     volumeManager.VolumeDown();
+                else if (key == muteChar && modifier == muteModifier)
+                    volumeManager.Mute();
             }
 
             base.WndProc(ref m);
@@ -78,6 +86,7 @@ namespace Volume_Control
         {
             UnregisterHotKey(this.Handle, UpHotkeyId);
             UnregisterHotKey(this.Handle, DownHotkeyId);
+            UnregisterHotKey(this.Handle, MuteHotkeyId);
         }
     }
 }

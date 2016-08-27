@@ -14,5 +14,11 @@
     <Setting Name="HotkeyDOWNChar" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">40</Value>
     </Setting>
+    <Setting Name="HotkeyMUTEModifier" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="HotkeyMUTEChar" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">35</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

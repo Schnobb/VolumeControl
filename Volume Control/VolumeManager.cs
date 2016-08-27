@@ -15,12 +15,22 @@ namespace Volume_Control
 
         public void VolumeUp()
         {
-            keybd_event((byte)Keys.VolumeUp, 0, 0, 0);
+            PressKey(Keys.VolumeUp);
         }
 
         public void VolumeDown()
         {
-            keybd_event((byte)Keys.VolumeDown, 0, 0, 0);
+            PressKey(Keys.VolumeDown);
+        }
+
+        public void Mute()
+        {
+            PressKey(Keys.VolumeMute);
+        }
+
+        private void PressKey(Keys key)
+        {
+            keybd_event((byte)key, 0, 0, 0);
         }
     }
 }

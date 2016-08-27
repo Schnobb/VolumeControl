@@ -70,5 +70,29 @@ namespace Volume_Control.Properties {
                 this["HotkeyDOWNChar"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int HotkeyMUTEModifier {
+            get {
+                return ((int)(this["HotkeyMUTEModifier"]));
+            }
+            set {
+                this["HotkeyMUTEModifier"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("35")]
+        public int HotkeyMUTEChar {
+            get {
+                return ((int)(this["HotkeyMUTEChar"]));
+            }
+            set {
+                this["HotkeyMUTEChar"] = value;
+            }
+        }
     }
 }

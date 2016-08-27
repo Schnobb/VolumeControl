@@ -39,19 +39,6 @@ namespace Volume_Control
             RefreshHotkeys();
         }
 
-        private void RefreshHotkeys()
-        {
-            if (frmHotkeyHandler != null)
-                frmHotkeyHandler.Close();
-
-            int upModifier = Volume_Control.Properties.Settings.Default.HotkeyUPModifier;
-            int upChar = Volume_Control.Properties.Settings.Default.HotkeyUPChar;
-            int downModifier = Volume_Control.Properties.Settings.Default.HotkeyDOWNModifier;
-            int downChar = Volume_Control.Properties.Settings.Default.HotkeyDOWNChar;
-
-            frmHotkeyHandler = new FrmHotkeyHandler(volumeManager, (uint)upModifier, (uint)upChar, (uint)downModifier, (uint)downChar);
-        }
-
         #region event handlers
 
         private void notifyIcon_SettingsClick(object sender, EventArgs e)
@@ -60,7 +47,7 @@ namespace Volume_Control
             {
                 frmSettings = new FrmSettings();
                 frmSettings.Show();
-                RefreshHotkeys();
+                frmSettings.FormClosed += frmSettings_FormClosed;
             }
         }
 
@@ -69,9 +56,32 @@ namespace Volume_Control
             ExitThread();
         }
 
+        private void frmSettings_FormClosed(object sender, EventArgs e)
+        {
+            RefreshHotkeys();
+            frmSettings.FormClosed -= frmSettings_FormClosed;
+        }
+
         #endregion
 
         #region support methods
+
+        private void RefreshHotkeys()
+        {
+            if (frmHotkeyHandler != null)
+                frmHotkeyHandler.Close();
+
+            int upModifier = Properties.Settings.Default.HotkeyUPModifier;
+            int upChar = Properties.Settings.Default.HotkeyUPChar;
+
+            int downModifier = Properties.Settings.Default.HotkeyDOWNModifier;
+            int downChar = Properties.Settings.Default.HotkeyDOWNChar;
+
+            int muteModifier = Properties.Settings.Default.HotkeyMUTEModifier;
+            int muteChar = Properties.Settings.Default.HotkeyMUTEChar;
+
+            frmHotkeyHandler = new FrmHotkeyHandler(volumeManager, (uint)upModifier, (uint)upChar, (uint)downModifier, (uint)downChar, (uint)muteModifier, (uint)muteChar);
+        }
 
         private ToolStripMenuItem ToolStripMenuItemWithHandler(string displayText, EventHandler eventHandler)
         {
