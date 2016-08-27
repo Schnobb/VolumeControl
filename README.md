@@ -6,3 +6,9 @@ I just got some new headphones and I ain't got no volume control on them. Since 
 It just translate hotkey windows messages into keyboard windows messages emulating media keys.
 
 I'll probably add some other features. As of now I just handle volume up/down. And they are hardcoded. Ugh. I feel like I am at work.
+
+-
+
+The system tray application framework is based on this wonderful article by Micael Sorens:
+
+https://www.simple-talk.com/dotnet/.net-framework/creating-tray-applications-in-.net-a-practical-guide/
