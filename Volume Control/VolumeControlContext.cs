@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -23,10 +24,11 @@ namespace Volume_Control
         public VolumeControlContext()
         {
             components = new System.ComponentModel.Container();
+            Icon volumeControlIcon = new Icon(Properties.Resources.VolumeControl, SystemInformation.SmallIconSize);
             notifyIcon = new NotifyIcon(components)
             {
                 ContextMenuStrip = new ContextMenuStrip(),
-                Icon = Volume_Control.Properties.Resources.VolumeControl,
+                Icon = volumeControlIcon,
                 Text = DefaultToolTip,
                 Visible = true
             };
